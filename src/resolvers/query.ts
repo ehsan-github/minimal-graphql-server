@@ -1,5 +1,8 @@
 
-export function hello(_, { name }) {
-  const returnValue = !name ? `Hello ${name || 'World!'}` : null
-  return returnValue
+export function user(obj, { accessToken }, { dataloader }) {
+  return dataloader.load(['/api/user/profile', {
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  }])
 }

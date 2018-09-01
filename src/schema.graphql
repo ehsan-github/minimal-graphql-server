@@ -1,3 +1,81 @@
+scalar Upload
+
+type Mutation {
+  registerUser(email: String!, password: String!, typ: UserType!): RegisterPayload!
+  loginUser(email: String!, password: String!): LoginPayload!
+
+  verifyEmail(code: String!): LoginPayload!
+  resendVerifyEmail(email: String!): Boolean!
+
+  requestResetPassword(email: String!): Boolean!
+  resetPassword(code: String!, password: String!): Boolean!
+
+  changePassword(accessToken: String!, password: String!): Boolean!
+
+  uploadAvatar(accessToken: String!, avatar: Upload!): UploadAvatarPayload!
+}
+
 type Query {
-  hello(name: String): String
+  user(accessToken: String!): User!
+}
+
+enum UserType {
+  APPLICANT,
+  LAWYER,
+  TRANSLATOR
+}
+
+type RegisterPayload {
+  _id: ID!
+  oauth_id: Int
+  verified: Boolean
+  lawyer: Lawyer
+  applicant: Applicant
+  translator: Translator
+  updated_at: String
+  created_at: String
+  email: String
+}
+
+type LoginPayload {
+  expires_in: Int
+  expires_at: Int
+  access_token: String!
+  user: User!
+}
+
+type UploadAvatarPayload {
+  avatar: String!
+}
+
+type User {
+  _id: ID!
+  oauth_id: Int
+  verified: Boolean
+  title: String
+  first_name: String
+  last_name: String
+  middle_name: String
+  country: String
+  passport_country: String
+  lawyer: Lawyer
+  applicant: Applicant
+  translator: Translator
+  updated_at: String
+  created_at: String
+  email: String
+}
+
+type Lawyer {
+  _id: ID!
+}
+
+type Translator {
+  _id: ID!
+}
+
+type Applicant {
+  _id: ID!
+  updated_at: String
+  created_at: String
 }
