@@ -6,3 +6,13 @@ export function user(obj, { accessToken }, { dataloader }) {
     }
   }])
 }
+
+export function loginUserQuery(obj, { email, password }, { dataloader }) {
+  return dataloader.load(['/api/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, password })
+  }])
+}

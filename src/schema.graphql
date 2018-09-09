@@ -17,6 +17,7 @@ type Mutation {
 
 type Query {
   user(accessToken: String!): User!
+  loginUserQuery(email: String!, password: String!): LoginPayload!
 }
 
 enum UserType {
