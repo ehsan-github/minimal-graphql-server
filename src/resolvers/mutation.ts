@@ -21,14 +21,6 @@ export function loginUser(obj, { email, password }, { dataloader }) {
   }])
 }
 
-export function verifyEmail(obj, { code }, { dataloader }) {
-  return dataloader.load(['/api/auth/verify?' + code, {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }])
-}
-
 export function requestResetPassword(obj, { email }, { dataloader }) {
   let form = new FormData();
   form.append('email', email);

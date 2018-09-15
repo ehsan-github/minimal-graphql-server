@@ -16,3 +16,11 @@ export function loginUserQuery(obj, { email, password }, { dataloader }) {
     body: JSON.stringify({ email, password })
   }])
 }
+
+export function verifyEmail(obj, { code }, { dataloader }) {
+  return dataloader.load(['/api/auth/verify?' + code, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }])
+}

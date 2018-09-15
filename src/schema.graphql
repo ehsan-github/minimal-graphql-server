@@ -4,7 +4,6 @@ type Mutation {
   registerUser(email: String!, password: String!, typ: UserType!): RegisterPayload!
   loginUser(email: String!, password: String!): LoginPayload!
 
-  verifyEmail(code: String!): LoginPayload!
   resendVerifyEmail(email: String!): Boolean!
 
   requestResetPassword(email: String!): Boolean!
@@ -16,6 +15,7 @@ type Mutation {
 }
 
 type Query {
+  verifyEmail(code: String!): LoginPayload!
   user(accessToken: String!): User!
   loginUserQuery(email: String!, password: String!): LoginPayload!
 }
