@@ -2,6 +2,11 @@ import DataLoader = require('dataloader')
 import fetch = require('node-fetch')
 
 const base_url = 'https://dev.immiwork.com/back'
+//'http://127.0.0.1:8586'
+
+const parseJSON = response => response.text().then(function(text) {
+  return text ? JSON.parse(text) : {}
+})
 
 export default new DataLoader(keys => Promise.all(keys.map(
   async ([url, opt, format = 'json']) => {
@@ -9,7 +14,7 @@ export default new DataLoader(keys => Promise.all(keys.map(
     if (!response.ok) throw new Error(response.statusText)
     switch (format) {
       case 'json':
-        return await response.json()
+        return parseJSON(response)
       default:
         throw new Error('Undefined format: ' + format)
     }
